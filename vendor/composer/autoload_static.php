@@ -594,6 +594,7 @@ class ComposerStaticInitb21027085f7378c82f5b50436023a7d1
         'App\\Models\\Downpayment' => __DIR__ . '/../..' . '/app/Models/Downpayment.php',
         'App\\Models\\Order' => __DIR__ . '/../..' . '/app/Models/Order.php',
         'App\\Models\\PaymentMethod' => __DIR__ . '/../..' . '/app/Models/PaymentMethod.php',
+        'App\\Models\\Post' => __DIR__ . '/../..' . '/app/Models/Post.php',
         'App\\Models\\Report' => __DIR__ . '/../..' . '/app/Models/Report.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\Websetting' => __DIR__ . '/../..' . '/app/Models/Websetting.php',
