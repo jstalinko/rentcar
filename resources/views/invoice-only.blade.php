@@ -67,7 +67,7 @@ $days = $diff->days;
                             <img src="{{$pm->icon}}" class="img-fluid" style="max-width: 130px;height:auto;">
                             <h6 class="text-center font-weight-bold">{{$order->payment_method}}</h6>
                                 <p>
-                                    {{$pm->description}}
+                                    {{$pm?->description ?? 'Description Not Found'}}
                                 </p>
                         </div>
 

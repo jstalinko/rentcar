@@ -188,7 +188,8 @@ $days = $diff->days;
                 </div>
             </div>
             <footer class="text-center mt-4">
-                <b>Payment Method : {{$order->payment_method}} - {{\App\Models\PaymentMethod::where('name' , $order->payment_method)->first()->description}}</b>
+                @php $pm = \App\Models\PaymentMethod::where('name' , $order->payment_method)->first(); @endphp
+                <b>Payment Method : {{$order->payment_method}} - {{$pm?->description ?? '-'}}</b>
                 <p class="text-1"><strong>NOTE :</strong> {{__('pickup in other location must be approved by the admin first, the admin will confirm via your contact')}}</p>
               
             </footer>
