@@ -6,7 +6,7 @@
             <div class="col-md">
                 <div class="ftco-footer-widget mb-4">
                     <h2 class="ftco-heading-2"><a href="{{url('/')}}" class="logo">{!!web_name()!!}</a></h2>
-                    <p>{{substr(web()->about,0,100)}} ... <a href="/about">More</a></p>
+                    <p>{{substr(strip_tags(web()->about),0,100)}} ... <a href="/about">More</a></p>
                     <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                         <li class="ftco-animate"><a href="{{web()->fb_url}}"><span class="icon-facebook"></span></a></li>
                         <li class="ftco-animate"><a href="{{web()->ig_url}}"><span class="icon-instagram"></span></a></li>
