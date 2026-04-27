@@ -457,43 +457,46 @@ class DatabaseSeeder extends Seeder
         ];
 
         foreach ($armada as $item) {
-            \App\Models\Armada::create($item);
+            \App\Models\Armada::updateOrCreate(
+                ['name' => $item['name'], 'brand' => $item['brand']],
+                $item
+            );
         }
 
-        \App\Models\Websetting::factory(1)->create();
+    //     \App\Models\Websetting::factory(1)->create();
 
-      //  \App\Models\Order::factory(100)->create();
+    //    \App\Models\Order::factory(100)->create();
 
-        \App\Models\User::create([
-            'name'     => 'Admin',
-            'email'    => 'admin@admin.com',
-            'password' => bcrypt('admin'),
-            'role'     => 'admin',
-        ]);
+    //     \App\Models\User::create([
+    //         'name'     => 'Admin',
+    //         'email'    => 'admin@admin.com',
+    //         'password' => bcrypt('admin'),
+    //         'role'     => 'admin',
+    //     ]);
 
-        $payments = [
-            [
-                'name'        => 'Bank Central Asia',
-                'icon'        => '/assets/images/bca.png',
-                'description' => 'BCA 122343948 a/n PT. Karya Mitra Mandiri',
-                'primary'     => 1,
-                'status'      => 'active',
-            ],
-            [
-                'name'        => 'Bank Mandiri',
-                'icon'        => '/assets/images/mandiri.png',
-                'description' => 'Mandiri 122343948 a/n PT. Karya Mitra Mandiri',
-                'primary'     => 0,
-            ],
-            [
-                'name'        => 'Cash On Pickup',
-                'icon'        => '/assets/images/cash.png',
-                'description' => 'Pay with cash when you pickup your order',
-            ],
-        ];
+    //     $payments = [
+    //         [
+    //             'name'        => 'Bank Central Asia',
+    //             'icon'        => '/assets/images/bca.png',
+    //             'description' => 'BCA 122343948 a/n PT. Karya Mitra Mandiri',
+    //             'primary'     => 1,
+    //             'status'      => 'active',
+    //         ],
+    //         [
+    //             'name'        => 'Bank Mandiri',
+    //             'icon'        => '/assets/images/mandiri.png',
+    //             'description' => 'Mandiri 122343948 a/n PT. Karya Mitra Mandiri',
+    //             'primary'     => 0,
+    //         ],
+    //         [
+    //             'name'        => 'Cash On Pickup',
+    //             'icon'        => '/assets/images/cash.png',
+    //             'description' => 'Pay with cash when you pickup your order',
+    //         ],
+    //     ];
 
-        foreach ($payments as $payment) {
-            \App\Models\PaymentMethod::create($payment);
-        }
+    //     foreach ($payments as $payment) {
+    //         \App\Models\PaymentMethod::create($payment);
+    //     }
     }
 }
