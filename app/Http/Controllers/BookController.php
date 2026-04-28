@@ -143,12 +143,14 @@ class BookController extends Controller
 
         $order->payment_method = $request->payment_method;
         $order->note = '['.$request->code.']  Order '.$order->armada->brand.' '.$order->armada->type.' for '.$order->duration.' '.$order->duration_type.'|'. $otherNotes;
+        $order->status = 'waiting_confirmation';
         $order->save();
         BookConfirm::dispatch($request->code);
         OtherLocation::dispatch($request->code);
-        
+    
         $armada = Armada::find($order->armada_id);
         $armada->used = $armada->used + 1;
+    
         $armada->save();
 
         return redirect('/i/'.$request->code);
