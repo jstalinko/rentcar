@@ -126,11 +126,23 @@ class BookController extends Controller
     public function confirmPost(Request $request)
     {
         $order = Order::where('booking_code',$request->code)->first();
-        $otherNotes = $order->pickup_type == 'other_location' ? 'Pickup lokasi lain di kenakan biaya tambahan. ' : '';
-        $otherNotes .= $order->dropoff_type == 'other_location' ? 'Dropoff lokasi lain di kenakan biaya tambahan. ' : '';
-        $otherNotes .= $order->service_type == 'with_driver' ? 'Dengan driver.' : '';
+        
+        $otherNotes = '';
+        if($order->pickup_type == 'other_location')
+        {
+            $otherNotes .= 'Pickup lokasi lain di kenakan biaya tambahan. ';
+        }
+        if($order->dropoff_type == 'other_location')
+        {
+            $otherNotes .= 'Dropoff lokasi lain di kenakan biaya tambahan. ';
+        }
+        if($order->service_type == 'with_driver')
+        {
+            $otherNotes .= 'Dengan driver. ';
+        }
+
         $order->payment_method = $request->payment_method;
-        $order->note = '['.$request->code.']  Order '.$order->armada->brand.' '.$order->armada->type.' for '.$order->duration.' '.$order->duration_type.' with '.$request->payment_method.' payment method | '. $otherNotes;
+        $order->note = '['.$request->code.']  Order '.$order->armada->brand.' '.$order->armada->type.' for '.$order->duration.' '.$order->duration_type.'|'. $otherNotes;
         $order->save();
         BookConfirm::dispatch($request->code);
         OtherLocation::dispatch($request->code);
