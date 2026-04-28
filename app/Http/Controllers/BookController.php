@@ -112,6 +112,7 @@ class BookController extends Controller
 
         }else{
         $data['order'] = Order::where('booking_code',$request->code)->first();
+        $data['isConfirmed'] = $data['order']->status == 'waiting_confirmation' || $data['order']->status == 'confirmed' || $data['order']->status == 'done';
         return view('invoice',$data);
         }
     }
@@ -125,9 +126,11 @@ class BookController extends Controller
     public function confirmPost(Request $request)
     {
         $order = Order::where('booking_code',$request->code)->first();
-        $order->status = 'waiting_confirmation';
+        $otherNotes = $order->pickup_type == 'other_location' ? 'Pickup lokasi lain di kenakan biaya tambahan. ' : '';
+        $otherNotes .= $order->dropoff_type == 'other_location' ? 'Dropoff lokasi lain di kenakan biaya tambahan. ' : '';
+        $otherNotes .= $order->service_type == 'with_driver' ? 'Dengan driver.' : '';
         $order->payment_method = $request->payment_method;
-        $order->note = '['.$request->code.']  Order '.$order->armada->brand.' '.$order->armada->type.' for '.$order->duration.' '.$order->duration_type.' with '.$request->payment_method.' payment method ';
+        $order->note = '['.$request->code.']  Order '.$order->armada->brand.' '.$order->armada->type.' for '.$order->duration.' '.$order->duration_type.' with '.$request->payment_method.' payment method | '. $otherNotes;
         $order->save();
         BookConfirm::dispatch($request->code);
         OtherLocation::dispatch($request->code);

@@ -174,10 +174,6 @@ $days = $diff->days;
                           <td colspan="2" class="text-right"><strong>Sub Total:</strong></td>
                           <td class="text-center">{{rupiah($order->total_price)}}</td>
                         </tr>
-                        {{-- <tr>
-                          <td colspan="2" class="text-right"><strong>Pajak / Tax:</strong><br>(PPN 11%)</td>
-                          <td class="text-center">{{rupiah($order->total_price * 0.11 )}}</td>
-                        </tr> --}}
                         <tr>
                           <td colspan="2" class="text-right border-bottom-0"><strong>Total:</strong></td>
                           <td class="text-center border-bottom-0">{{rupiah($order->total_price)}}</td>

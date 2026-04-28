@@ -46,13 +46,13 @@
                             <div class="card shadow-sm border-0 mb-3">
                                 <div class="card-body p-3">
                                     <h5 class="font-weight-bold">{{__('CONTACT INFORMATION')}}</h5>
+                                    <input type="hidden" name="contact_type" id="contactInfo" value="whatsapp">
                                     <div class="input-group mb-3 border-0">
-                                        <select class="custom-select border-danger" name="contact_type" id="contactInfo">
-                                            <option value="whatsapp">{{__('WhatsApp')}}</option>
-                                            <option value="telegram">{{__('Telegram')}}</option>
-                                        </select>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text bg-success text-white"><i class="fa-brands fa-whatsapp"></i> &nbsp; WhatsApp</span>
+                                        </div>
+                                        <input type="text" name="contact_id" class="form-control" placeholder="Nomor WhatsApp (contoh: 08123456789)">
                                     </div>
-                                    <input type="text" name="contact_id" class="form-control" placeholder="Your Contact ID  ( Whatsapp Number or Telegram ID)">
                                 </div>
                             </div>
                             <div class="card shadow-sm border-0 mb-3">
@@ -85,10 +85,12 @@
                                         <h6 class="text-dark">{{__('location')}} : <span>Kantor Rental Mobil</span></h6>
                                     </div>
                                     <div id="formLain" class="bg-light p-3" @if($isDirect) @if($direct->pickup_type == 'other_location') style="display:block" @else style="display: none;" @endif  @else style="display: none;" @endif>
-                                        <h5>{{__('cost')}} : <span>{{rupiah($book->price_otherlocation)}}</span></h5>
                                         <label class="text-dark">{{__('location')}} :</label>
-                                        <input type="text" id="address_pickup" @if($isDirect) @if($direct->pickup_type == 'other_location') value="{{$direct->pickup_address}}" @endif @endif name="pickup_address" class="form-control" placeholder="Ex. Bali">
-                                        <p>{{__('nb')}}</p>
+                                        <input type="text" id="address_pickup" @if($isDirect) @if($direct->pickup_type == 'other_location') value="{{$direct->pickup_address}}" @endif @endif name="pickup_address" class="form-control mb-2" placeholder="Masukkan alamat Pick-up">
+                                        <div class="alert alert-warning p-2 mb-0" style="font-size:0.85rem;">
+                                            <i class="fa-solid fa-circle-info"></i>
+                                            <strong>Catatan:</strong> Pick-up / Drop-off lokasi lebih dari 5KM di luar garasi dikenakan biaya tambahan. Biaya akan diinformasikan oleh admin kami sesuai rate ojek online.
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -110,10 +112,12 @@
                                         <h6 class="text-dark">{{__('location')}} : <span>Kantor Rental Mobil</span></h6>
                                     </div>
                                     <div id="pengembalianLuar" class="bg-light p-3" @if($isDirect) @if($direct->dropoff_type == 'other_location') style="display:block" @else style="display: none;" @endif  @else style="display: none;" @endif>
-                                        <h5>{{__('cost')}} : <span>{{rupiah($book->price_otherlocation)}}</span></h5>
                                         <label class="text-dark">{{__('location')}} :</label>
-                                        <input type="text" id="address_dropoff" @if($isDirect) @if($direct->dropoff_type == 'other_location') value="{{$direct->dropoff_address}}" @endif @endif name="dropoff_address" class="form-control" placeholder="Ex. Bali">
-                                        <p>{{__('nb')}}</p>
+                                        <input type="text" id="address_dropoff" @if($isDirect) @if($direct->dropoff_type == 'other_location') value="{{$direct->dropoff_address}}" @endif @endif name="dropoff_address" class="form-control mb-2" placeholder="Masukkan alamat Drop-off">
+                                        <div class="alert alert-warning p-2 mb-0" style="font-size:0.85rem;">
+                                            <i class="fa-solid fa-circle-info"></i>
+                                            <strong>Catatan:</strong> Pick-up / Drop-off lokasi lebih dari 5KM di luar garasi dikenakan biaya tambahan. Biaya akan diinformasikan oleh admin kami sesuai rate ojek online.
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -306,12 +310,12 @@
                         3. Pengemudi harus membagikan kepada penyedia foto kartu kredit mereka <br>
                         4. Jika pengemudi tidak memiliki kartu kredit, pengemudi harus menggantikannya dengan 2 dokumen dari
                         pilihan berikut: NPWP, BPJS, atau Akte Lahir, Kartu Keluarga, Kartu Identitas Karyawan, Paspor,
-                        Ijazah Sekolah Terakhir, Kartu Tanda Anggota Polri / TNI. <br>
-                        5. Pengemudi harus membayar deposit sebesar Rp 1.000.000 melalui transfer kepada jayamahe sebelum
+                        Ijazah Sekolah Terakhir, Kartu Tanda Anggota Polri / TNI. <br>3
+                        5. Pengemudi harus membayar deposit sebesar Rp 1.000.000 melalui transfer kepada pihak DNA RENTAL CIREBON sebelum
                         rental dimulai. <br>
                         6. Pengemudi wajib memberikan alamat email saat serah terima kendaraan untuk menerima bukti transfer
                         pengembalian deposit. <br>
-                        7. Deposit akan dikembalikan paling lambat 5 hari kerja setelah rental berakhir. <br>
+                        7. Deposit akan dikembalikan setelah rental berakhir dan Armada dalam kondisi baik. <br>
                         8. Penyewa yang ingin meminta kursi bayi atau plat ganjil atau genap dapat menulis permintaanya di
                         bawah halaman Permintaan Khusus pada halaman pesanan.. <br>
                         9. Semua permintaan khusus tergantung dari ketersediaan penyedia rental dan dapat dikenakan biaya
@@ -321,7 +325,7 @@
                         pengambilan. <br>
                         11. Pengemudi harus memenuhi syarat paling lambat 6 jam sebelum pengambilan. Jika tidak, pesanan
                         tidak bisa di-refund jika pengemudi tidak dapat memenuhi syarat <br>
-                        12. Batas Pengantaran kendaraan maksimal 15km dari kantor rental, apabila melebihi 15km maka anda
+                        12. Batas Pengantaran kendaraan maksimal 5km dari garasi rental, apabila melebihi 5km maka anda
                         akan di kenakan biaya tambahan sesuai lokasi pengantaran anda, admin kami akan menginformasikan
                         kepada anda mengenai biaya tambahan. <br>
                     </p>
@@ -333,11 +337,11 @@
                         4. Jika pengemudi tidak memiliki kartu kredit, pengemudi harus menggantikannya dengan 2 dokumen dari
                         pilihan berikut: NPWP, BPJS, atau Akte Lahir, Kartu Keluarga, Kartu Identitas Karyawan, Paspor,
                         Ijazah Sekolah Terakhir, Kartu Tanda Anggota Polri / TNI. <br>
-                        5. Pengemudi harus membayar deposit sebesar Rp 1.000.000 melalui transfer kepada jayamahe sebelum
+                        5. Pengemudi harus membayar deposit sebesar Rp 1.000.000 melalui transfer kepada pihak DNA RENTAL CIREBON sebelum
                         rental dimulai. <br>
                         6. Pengemudi wajib memberikan alamat email saat serah terima kendaraan untuk menerima bukti transfer
                         pengembalian deposit. <br>
-                        7. Deposit akan dikembalikan paling lambat 5 hari kerja setelah rental berakhir. <br>
+                        7. Deposit akan dikembalikan setelah rental berakhir dan Armada dalam kondisi baik. <br>
                         8. Penyewa yang ingin meminta kursi bayi atau plat ganjil atau genap dapat menulis permintaanya di
                         bawah halaman Permintaan Khusus pada halaman pesanan.. <br>
                         9. Semua permintaan khusus tergantung dari ketersediaan penyedia rental dan dapat dikenakan biaya
@@ -347,7 +351,7 @@
                         pengambilan. <br>
                         11. Pengemudi harus memenuhi syarat paling lambat 6 jam sebelum pengambilan. Jika tidak, pesanan
                         tidak bisa di-refund jika pengemudi tidak dapat memenuhi syarat <br>
-                        12. Batas Pengantaran kendaraan maksimal 15km dari kantor rental, apabila melebihi 15km maka anda
+                        12. Batas Pengantaran kendaraan maksimal 5km dari garasi rental, apabila melebihi 5km maka anda
                         akan di kenakan biaya tambahan sesuai lokasi pengantaran anda, admin kami akan menginformasikan
                         kepada anda mengenai biaya tambahan. <br>
                     </p>
@@ -479,8 +483,8 @@
                 if (selectValue == 'kantor') {
                     $('#formKantor').show(200);
                     $('#formLain').hide();
-                    $('#pickup_loc').html('Kantor / Office');
-                    $('#pickup_loc2').html('Kantor / Office');
+                    $('#pickup_loc').html('Garasi / Garage');
+                    $('#pickup_loc2').html('Garasi / Garage');
                 } else {
                     $('#formKantor').hide();
                     $('#formLain').show(200);
@@ -495,8 +499,8 @@
                 if (selectValue == 'kantor') {
                     $('#pengembalianKantor').show(200);
                     $('#pengembalianLuar').hide();
-                    $('#dropoff_loc').html('Kantor / Office');
-                    $('#dropoff_loc2').html('Kantor / Office');
+                    $('#dropoff_loc').html('Garasi / Garage');
+                    $('#dropoff_loc2').html('Garasi / Garage');
                 } else {
                     var otherLoc = $('#address_dropoff').val();
                     $('#pengembalianKantor').hide();
@@ -548,7 +552,55 @@
             $('#rental_start,#rental_end,#rental_time_start,#rental_time_end').change(function(){
                ayoBerhitung(); 
             });
-            $('#konfirm').click(function(){
+            $('#konfirm').click(function(e){
+                // Validasi semua field wajib sebelum buka modal
+                var errors = [];
+
+                var name = $('#name').val().trim();
+                var email = $('#email').val().trim();
+                var phone = $('#phone').val().trim();
+                var contactId = $('input[name="contact_id"]').val().trim();
+                var pickupType = $('#pengambilan').val();
+                var dropoffType = $('#pengembalian').val();
+                var pickupAddress = $('#address_pickup').val().trim();
+                var dropoffAddress = $('#address_dropoff').val().trim();
+
+                if (!name) {
+                    errors.push('• Nama lengkap belum diisi');
+                }
+                if (!email) {
+                    errors.push('• Email belum diisi');
+                }
+                if (!phone) {
+                    errors.push('• Nomor telepon belum diisi');
+                }
+                if (!contactId) {
+                    errors.push('• Contact ID (WhatsApp / Telegram) belum diisi');
+                }
+                if (!pickupType) {
+                    errors.push('• Lokasi Pick-up belum dipilih');
+                } else if (pickupType === 'lokasi_lain' && !pickupAddress) {
+                    errors.push('• Alamat Pick-up (lokasi lain) belum diisi');
+                }
+                if (!dropoffType) {
+                    errors.push('• Lokasi Drop-off belum dipilih');
+                } else if (dropoffType === 'lokasi_lain' && !dropoffAddress) {
+                    errors.push('• Alamat Drop-off (lokasi lain) belum diisi');
+                }
+
+                if (errors.length > 0) {
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Form Belum Lengkap!',
+                        html: '<div style="text-align:left; line-height:1.8;">' + errors.join('<br>') + '</div>',
+                        confirmButtonText: 'OK, Lengkapi Dulu',
+                        confirmButtonColor: '#d33',
+                    });
+                    return false;
+                }
+
                 ayoBerhitung();
             });
         });

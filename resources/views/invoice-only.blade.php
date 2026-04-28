@@ -231,10 +231,13 @@ $days = $diff->days;
                 </div>
             </div>
             <footer class="text-center mt-4">
-                <p class="text-1"><strong>NOTE :</strong> {{__('pickup in other location must be approved by the admin first, the admin will confirm via your contact')}}</p>
+                <p class="text-1 text-danger"><strong>NOTE :</strong> {{__('pickup in other location must be approved by the admin first, the admin will confirm via your contact')}}</p>
+                <p class="text-1 text-danger">Harga di atas tidak termasuk penjemputan atau pengembalian lokasi lebih dari 5KM di luar garasi dikenakan biaya tambahan. Biaya akan diinformasikan oleh admin kami sesuai rate ojek online.</p>
                 <div class="btn-group btn-group-sm d-print-none">
                     <a href="javascript:window.print()" class="btn btn-info shadow-none mr-2"><i class="fa fa-print"></i> Print</a> 
+                    @if($isConfirmed)
                     <a href="/i/{{$order->booking_code}}?pdf=true" class="btn btn-success shadow-none"><i class="fa fa-download"></i> Download</a>
+                    @endif
                 </div>
             </footer>
         </main>

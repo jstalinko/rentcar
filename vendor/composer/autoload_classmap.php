@@ -39,7 +39,6 @@ return array(
     'App\\Models\\Downpayment' => $baseDir . '/app/Models/Downpayment.php',
     'App\\Models\\Order' => $baseDir . '/app/Models/Order.php',
     'App\\Models\\PaymentMethod' => $baseDir . '/app/Models/PaymentMethod.php',
-    'App\\Models\\Post' => $baseDir . '/app/Models/Post.php',
     'App\\Models\\Report' => $baseDir . '/app/Models/Report.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Models\\Websetting' => $baseDir . '/app/Models/Websetting.php',
